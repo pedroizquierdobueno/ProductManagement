@@ -1,10 +1,9 @@
-﻿namespace ProductManagement.Products
+﻿namespace ProductManagement.Products;
+
+public enum ProductStockState : byte
 {
-	public enum ProductStockState : byte
-	{
-		PreOrder,
-		InStock,
-		NotAvailable,
-		Stopped
-	}
+	PreOrder,
+	InStock,
+	NotAvailable,
+	Stopped
 }

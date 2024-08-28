@@ -1,7 +1,6 @@
-﻿namespace ProductManagement.Categories
+﻿namespace ProductManagement.Categories;
+
+public static class CategoryConsts
 {
-	public static class CategoryConsts
-	{
-		public const int MaxNameLength = 128;
-	}
+	public const int MaxNameLength = 128;
 }
