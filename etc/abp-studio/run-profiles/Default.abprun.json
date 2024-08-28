@@ -1,0 +1,15 @@
+{
+  "folders": {
+    "items": {
+      "ProductManagement": {}
+    }
+  },
+  "applications": {
+    "ProductManagement.Web": {
+      "type": "dotnet-project",
+      "path": "../../../src/ProductManagement.Web/ProductManagement.Web.csproj",
+      "launchUrl": "https://localhost:44364/",
+      "folder": "ProductManagement"
+    }
+  }
+}
