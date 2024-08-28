@@ -1,0 +1,14 @@
+{
+  "id": "faff4156-5cad-47c0-aaf6-99c8245385ef",
+  "template": "empty",
+  "modules": {
+    "ProductManagement": {
+      "path": "ProductManagement.abpmdl"
+    }
+  },
+  "runProfiles": {
+    "Default": {
+      "path": "etc/abp-studio/run-profiles/Default.abprun.json"
+    }
+  }
+}
