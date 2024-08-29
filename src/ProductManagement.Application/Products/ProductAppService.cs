@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProductManagement.Categories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic.Core;
@@ -8,11 +9,13 @@ using Volo.Abp.Domain.Repositories;
 
 namespace ProductManagement.Products;
 
-public class ProductAppService(IRepository<Product, Guid> productRepository) : ProductManagementAppService, IProductAppService
+public class ProductAppService(IRepository<Product, Guid> productRepository, IRepository<Category, Guid> categoryRepository)
+	: ProductManagementAppService, IProductAppService
 {
 	private readonly IRepository<Product, Guid> _productRepository = productRepository;
+    private readonly IRepository<Category, Guid> _categoryRepository = categoryRepository;
 
-	public async Task<PagedResultDto<ProductDto>> GetListAsync(PagedAndSortedResultRequestDto input)
+    public async Task<PagedResultDto<ProductDto>> GetListAsync(PagedAndSortedResultRequestDto input)
 	{
 		IQueryable<Product> queryable = await _productRepository
 								.WithDetailsAsync(p => p.Category);
@@ -27,5 +30,17 @@ public class ProductAppService(IRepository<Product, Guid> productRepository) : P
 		long count = await _productRepository.GetCountAsync();
 
 		return new PagedResultDto<ProductDto>(count, ObjectMapper.Map<List<Product>, List<ProductDto>>(products));
+	}
+
+	public async Task CreateAsync(CreateUpdateProductDto input)
+	{
+		await _productRepository.InsertAsync(ObjectMapper.Map<CreateUpdateProductDto, Product>(input));
+	}
+
+	public async Task<ListResultDto<CategoryLookupDto>> GetCategoriesAsync()
+	{
+		var categories = await _categoryRepository.GetListAsync();
+
+		return new ListResultDto<CategoryLookupDto>(ObjectMapper.Map<List<Category>, List<CategoryLookupDto>>(categories));
 	}
 }

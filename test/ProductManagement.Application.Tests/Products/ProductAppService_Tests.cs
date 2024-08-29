@@ -1,9 +1,7 @@
 ﻿using Shouldly;
-using System;
 using System.Threading.Tasks;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Modularity;
-using Volo.Abp.Validation;
 using Xunit;
 
 namespace ProductManagement.Products;
