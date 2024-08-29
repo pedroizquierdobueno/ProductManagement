@@ -1,17 +1,19 @@
 ﻿using Shouldly;
+using System;
 using System.Threading.Tasks;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Modularity;
+using Volo.Abp.Validation;
 using Xunit;
 
 namespace ProductManagement.Products;
 
-public class ProductAppService_Tests<TStartupModule> : ProductManagementTestBase<TStartupModule>
-	where TStartupModule : IAbpModule
+public abstract class ProductAppService_Tests<TStartupModule> : ProductManagementApplicationTestBase<TStartupModule>
+    where TStartupModule : IAbpModule
 {
 	private readonly IProductAppService _productAppService;
 
-	public ProductAppService_Tests()
+	protected ProductAppService_Tests()
 	{
 		_productAppService = GetRequiredService<IProductAppService>();
 	}
