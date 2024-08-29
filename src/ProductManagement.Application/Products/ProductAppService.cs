@@ -54,4 +54,9 @@ public class ProductAppService(IRepository<Product, Guid> productRepository, IRe
 		var product = await _productRepository.GetAsync(id);
 		ObjectMapper.Map(input, product);
 	}
+
+	public async Task DeleteAsync(Guid id)
+	{
+        await _productRepository.DeleteAsync(id);
+	}
 }

@@ -11,6 +11,33 @@
             ajax: abp.libs.datatables.createAjax(productManagement.products.product.getList),
             columnDefs: [
                 {
+                    title: l("Actions"),
+                    rowAction: {
+                        items: [
+                            {
+                                text: l("Edit"),
+                                action: function (data) {
+                                    editModal.open({ id: data.record.id });
+                                }
+                            },
+                            {
+                                text: l("Delete"),
+                                confirmMessage: function (data) {
+                                    return l("ProductDeletionConfirmationMessage", data.record.name);
+                                },
+                                action: function (data) {
+                                    productManagement.products.product
+                                        .delete(data.record.id)
+                                        .then(function () {
+                                            abp.notify.info(l("SuccessfullyDeleted"));
+                                            dataTable.ajax.reload();
+                                        });
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
                     title: l("Name"),
                     data: "name"
                 },
@@ -34,24 +61,16 @@
                     title: l("CreationTime"),
                     data: "creationTime",
                     dataFormat: "date"
-                },
-                {
-                    title: l("Actions"),
-                    rowAction: {
-                        items: [
-                            {
-                                text: l("Edit"),
-                                action: function (data) {
-                                    editModal.open({ id: data.record.id });
-                                }
-                            }
-                        ]
-                    }
                 }
             ]
         })
     );
 
+    openCreateModal(dataTable);
+    openEditModal(dataTable);
+});
+
+function openCreateModal(dataTable) {
     var createModal = new abp.ModalManager(abp.appPath + "Products/CreateProductModal");
 
     createModal.onResult(function () {
@@ -62,10 +81,12 @@
         e.preventDefault();
         createModal.open();
     });
+}
 
+function openEditModal(dataTable) {
     var editModal = new abp.ModalManager(abp.appPath + "Products/EditProductModal");
 
-    editModal.onResult(function () {
+    editModal.onResult(function (dataTable) {
         dataTable.ajax.reload();
     });
-});
+}
