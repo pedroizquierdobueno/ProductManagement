@@ -1,4 +1,5 @@
 ﻿using Shouldly;
+using System;
 using System.Threading.Tasks;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Modularity;
@@ -11,7 +12,9 @@ public abstract class ProductAppService_Tests<TStartupModule> : ProductManagemen
 {
 	private readonly IProductAppService _productAppService;
 
-	protected ProductAppService_Tests()
+    Guid existingCategoryId = Guid.Parse("aqui-va-tu-guid-existente");
+
+    protected ProductAppService_Tests()
 	{
 		_productAppService = GetRequiredService<IProductAppService>();
 	}

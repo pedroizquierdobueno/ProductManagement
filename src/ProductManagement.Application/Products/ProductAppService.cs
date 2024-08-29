@@ -43,4 +43,15 @@ public class ProductAppService(IRepository<Product, Guid> productRepository, IRe
 
 		return new ListResultDto<CategoryLookupDto>(ObjectMapper.Map<List<Category>, List<CategoryLookupDto>>(categories));
 	}
+
+	public async Task<ProductDto> GetAsync(Guid id)
+	{
+		return ObjectMapper.Map<Product, ProductDto>(await _productRepository.GetAsync(id));
+	}
+
+	public async Task UpdateAsync(Guid id, CreateUpdateProductDto input)
+	{
+		var product = await _productRepository.GetAsync(id);
+		ObjectMapper.Map(input, product);
+	}
 }
