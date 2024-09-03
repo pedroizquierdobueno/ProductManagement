@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ProductManagement.Products;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Volo.Abp.Application.Dtos;
 using ProductManagement.Categories;
 

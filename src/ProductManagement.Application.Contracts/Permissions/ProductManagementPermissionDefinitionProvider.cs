@@ -8,9 +8,12 @@ public class ProductManagementPermissionDefinitionProvider : PermissionDefinitio
 {
     public override void Define(IPermissionDefinitionContext context)
     {
-        var myGroup = context.AddGroup(ProductManagementPermissions.GroupName);
-        //Define your own permissions here. Example:
-        //myGroup.AddPermission(ProductManagementPermissions.MyPermission1, L("Permission:MyPermission1"));
+        PermissionGroupDefinition myGroup = context.AddGroup(ProductManagementPermissions.GroupName, L("ProductManagement"));
+        
+        // Define permissions here
+        myGroup.AddPermission(ProductManagementPermissions.ProductCreation, L("Permission:ProductCreation"));
+        myGroup.AddPermission(ProductManagementPermissions.ProductEdition, L("Permission:ProductEdition"));
+        myGroup.AddPermission(ProductManagementPermissions.ProductDeletion, L("Permission:ProductDeletion"));
     }
 
     private static LocalizableString L(string name)
