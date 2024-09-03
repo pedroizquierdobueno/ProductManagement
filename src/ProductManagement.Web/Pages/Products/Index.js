@@ -66,11 +66,6 @@
         })
     );
 
-    openCreateModal(dataTable);
-    openEditModal(dataTable);
-});
-
-function openCreateModal(dataTable) {
     var createModal = new abp.ModalManager(abp.appPath + "Products/CreateProductModal");
 
     createModal.onResult(function () {
@@ -81,12 +76,10 @@ function openCreateModal(dataTable) {
         e.preventDefault();
         createModal.open();
     });
-}
 
-function openEditModal(dataTable) {
     var editModal = new abp.ModalManager(abp.appPath + "Products/EditProductModal");
 
-    editModal.onResult(function (dataTable) {
+    editModal.onResult(function () {
         dataTable.ajax.reload();
     });
-}
+});
